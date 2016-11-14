@@ -18,7 +18,7 @@ public class MainController {
 	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
 	public ModelAndView indexPage(){
 		User user = userService.getUser(1);
-		System.out.println(user);
+		System.out.println(user.getProfiles());
 		
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Spring Security Hello World");
