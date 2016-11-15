@@ -1,12 +1,17 @@
 package net.virux.mangapp.service.impl;
 
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import net.virux.mangapp.dao.ProfileDao;
 import net.virux.mangapp.dao.UserDao;
+import net.virux.mangapp.model.Profile;
 import net.virux.mangapp.model.User;
 import net.virux.mangapp.service.UserService;
 
@@ -17,11 +22,19 @@ public class UserServiceImpl implements UserService{
 	private UserDao userDao;
 	
 	@Autowired
+	private ProfileDao profileDao;
+	
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public void addUser(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setSignUpDate(new Date());
+		user.setState("Pending");
+		Set<Profile> profiles = new HashSet<Profile>();
+		profiles.add(profileDao.getProfile(2));
+		user.setProfiles(profiles);
 		userDao.addUser(user);		
 	}
 

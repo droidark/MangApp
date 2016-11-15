@@ -10,22 +10,23 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import net.virux.mangapp.dao.UserDao;
+import net.virux.mangapp.dao.ProfileDao;
+import net.virux.mangapp.model.Profile;
 import net.virux.mangapp.model.User;
 
-@Repository("userDao")
-public class UserDaoImpl implements UserDao{
-
+@Repository("profileDao")
+public class ProfileDaoImpl implements ProfileDao{
+	
 	@Autowired
 	SessionFactory sessionFactory;
-	
+
 	@Override
-	public void addUser(User user) {
+	public void addProfile(Profile profile) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		User usr = this.getUser(user.getUsername());
-		if(usr == null){
-			session.save(user);
+		Profile prof = this.getProfile(profile.getProfile());
+		if(prof == null){
+			session.save(prof);
 		}
 		tx.commit();
 		session.close();
@@ -33,46 +34,46 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public List<User> getAllUser() {
+	public List<Profile> getAllProfile() {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		Criteria cr = session.createCriteria(User.class);
-		List<User> users = cr.list();
+		Criteria cr = session.createCriteria(Profile.class);
+		List<Profile> profiles = cr.list();
 		tx.commit();
 		session.close();
-		return users;
+		return profiles;
 	}
 
 	@Override
-	public User getUser(int id) {
+	public Profile getProfile(int id) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		User user = session.get(User.class, id);
+		Profile profile = session.get(Profile.class, id);
 		tx.commit();
 		session.close();
-		return user;
+		return profile;
 	}
 
 	@Override
-	public User getUser(String username) {
+	public Profile getProfile(String profile) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		Criteria cr = session.createCriteria(User.class)
-				.add(Restrictions.eq("username", username));
-		User usr = (User) cr.uniqueResult();
+		Criteria cr = session.createCriteria(Profile.class)
+				.add(Restrictions.eq("username", profile));
+		Profile prof = (Profile) cr.uniqueResult();
 		tx.commit();
 		session.close();
-		return usr;
+		return prof;
 	}
 
 	@Override
-	public void setUser(User user) {
+	public void setProfile(Profile profile) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteUser(User user) {
+	public void deleteProfile(Profile profile) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,4 +1,4 @@
-package net.virux.mangapp.service.impl;
+package net.virux.mangapp.security;
 
 import java.util.ArrayList;
 import java.util.List;
