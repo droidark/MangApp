@@ -23,7 +23,7 @@
 		<!-- <property name="acquireIncrement" value="1"/>
 		<property name="minPoolSize" value="2"/>
 		<property name="maxPoolSize" value="5"/>
-		<property name="maxIdleTime" value="300"/> -->	
+		<property name="maxIdleTime" value="300"/> -->
 	</bean>
 	
 	<bean id="sessionFactory" 

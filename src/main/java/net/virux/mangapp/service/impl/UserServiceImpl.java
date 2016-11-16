@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService{
 	private ProfileDao profileDao;
 	
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private PasswordEncoder passwordEncoder;	
 	
 	@Override
 	public void addUser(User user) {
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService{
 		Set<Profile> profiles = new HashSet<Profile>();
 		profiles.add(profileDao.getProfile(2));
 		user.setProfiles(profiles);
-		userDao.addUser(user);		
+		userDao.addUser(user);
 	}
 
 	@Override
