@@ -12,18 +12,18 @@
 
 	<tx:annotation-driven transaction-manager="hibernateTransactionManager"/>
 	
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" 
-			>
-		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-		<property name="url" value="jdbc:mysql://localhost:3306/mangapp?serverTimezone=UTC"/>
-		<property name="username" value="root"/>
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" 
+			destroy-method="close">
+		<property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/mangapp?serverTimezone=UTC"/>
+		<property name="user" value="root"/>
 		<property name="password" value="admin"/>
 		
 		<!-- C3P0 CONFIG -->
-		<!-- <property name="acquireIncrement" value="1"/>
+		<property name="acquireIncrement" value="1"/>
 		<property name="minPoolSize" value="2"/>
 		<property name="maxPoolSize" value="5"/>
-		<property name="maxIdleTime" value="300"/> -->
+		<property name="maxIdleTime" value="300"/>
 	</bean>
 	
 	<bean id="sessionFactory" 
@@ -33,6 +33,7 @@
 			<list>
 				<value>net/virux/mangapp/model/User.hbm.xml</value>
 				<value>net/virux/mangapp/model/Profile.hbm.xml</value>
+				<value>net/virux/mangapp/model/Title.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

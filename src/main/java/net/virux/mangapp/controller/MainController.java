@@ -1,5 +1,7 @@
 package net.virux.mangapp.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +30,11 @@ public class MainController {
 	
 	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
 	public String indexPage(ModelMap model){
+		List<User> usrs = userService.getAllUsers();
+		System.out.println(usrs.get(1).getTitles());
 		
-		sendEmailService.readySendEmail("octavio.avarezdelcastillo@gmail.com", "crossfozz@gmail.com", "titulo", 
-				"cuerpo del mensaje");
+//		sendEmailService.readySendEmail("to@gmail.com", "from@gmail.com", "title", 
+//				"body");
 		
 		model.addAttribute("username", "lord cabula");
 		return "index";

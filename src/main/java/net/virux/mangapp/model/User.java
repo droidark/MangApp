@@ -17,6 +17,7 @@ public class User implements Serializable{
 	private String ipAddress;
 	private String state;
 	private Set<Profile> profiles = new HashSet<Profile>();
+	private Set<Title> titles = new HashSet<Title>();
 	
 	public Integer getIdUser() {
 		return idUser;
@@ -83,5 +84,11 @@ public class User implements Serializable{
 	}
 	public void setProfiles(Set<Profile> profiles) {
 		this.profiles = profiles;
+	}
+	public Set<Title> getTitles() {
+		return titles;
+	}
+	public void setTitles(Set<Title> titles) {
+		this.titles = titles;
 	}
 }

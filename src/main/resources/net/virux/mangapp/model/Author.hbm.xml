@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="net.virux.mangapp.model.Author" table="map_author">
+		<id column="id_author" name="idAuthor" type="integer">
+			<generator class="increment"/>
+		</id>		
+		<property name="name" column="author_name" type="string"/>
+		<property name="nameJp" column="author_name_jp" type="string"/>
+		<property name="avatar" column="author_avatar" type="string"/>
+		<property name="bio" column="author_bio" type="string"/>
+		
+		<!-- RELATIONSHIP MANY-TO-MANY [TABLE: map_author_x_title]-->
+		<set name="titles" table="map_user_x_title" inverse="true" lazy="true" 
+				fetch="select">
+			<key>
+				<column name="id_title" not-null="true"/>
+			</key>
+			<many-to-many entity-name="net.virux.mangapp.model.Author">
+				<column name="id_author" not-null="true"/>
+			</many-to-many>
+		</set>
+		
+	</class>
+</hibernate-mapping>

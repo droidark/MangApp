@@ -25,5 +25,16 @@
 				<column name="id_profile" not-null="true"/>
 			</many-to-many>
 		</set>
+		
+		<!-- RELATIONSHIP MANY-TO-MANY [TABLE: map_user_x_title]-->
+		<set name="titles" table="map_user_x_title" inverse="false" lazy="true" 
+				fetch="select" cascade="all">
+			<key>
+				<column name="id_user" not-null="true"/>
+			</key>
+			<many-to-many entity-name="net.virux.mangapp.model.Title">
+				<column name="id_title" not-null="true"/>
+			</many-to-many>
+		</set>
 	</class>
 </hibernate-mapping>
