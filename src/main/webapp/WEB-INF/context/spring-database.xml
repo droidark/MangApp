@@ -34,6 +34,7 @@
 				<value>net/virux/mangapp/model/User.hbm.xml</value>
 				<value>net/virux/mangapp/model/Profile.hbm.xml</value>
 				<value>net/virux/mangapp/model/Title.hbm.xml</value>
+				<value>net/virux/mangapp/model/Author.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

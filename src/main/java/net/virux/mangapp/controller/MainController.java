@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import net.virux.mangapp.model.Title;
 import net.virux.mangapp.model.User;
 import net.virux.mangapp.service.UserService;
 import net.virux.mangapp.service.impl.SendEmailService;
@@ -31,7 +33,10 @@ public class MainController {
 	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
 	public String indexPage(ModelMap model){
 		List<User> usrs = userService.getAllUsers();
-		System.out.println(usrs.get(1).getTitles());
+		System.out.println(usrs.get(0).getTitles());
+		for(Title t : usrs.get(0).getTitles()){
+			System.out.println(t.getTitleName());
+		}
 		
 //		sendEmailService.readySendEmail("to@gmail.com", "from@gmail.com", "title", 
 //				"body");

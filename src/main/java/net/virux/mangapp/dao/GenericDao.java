@@ -1,17 +1,18 @@
 package net.virux.mangapp.dao;
 
-import java.io.Serializable;
 import java.util.List;
 
-public interface GenericDao<T, ID extends Serializable> {
+public interface GenericDao<E, K> {
 	
-	void add(T entity);
+	void add(E entity);
 	
-	List<T> getAll();
+	void saveOrUpdate(E entity);
 	
-	T get(ID id);
+	void update(E entity);
 	
-	void set(T entity);
+	void remove(E entity);
 	
-	void delete(T entity);
+	E find(K key);
+	
+	List<E> getAll();
 }

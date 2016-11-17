@@ -16,7 +16,7 @@
 			<key>
 				<column name="id_title" not-null="true"/>
 			</key>
-			<many-to-many entity-name="net.virux.mangapp.model.Author">
+			<many-to-many entity-name="net.virux.mangapp.model.Title">
 				<column name="id_author" not-null="true"/>
 			</many-to-many>
 		</set>
