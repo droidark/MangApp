@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import net.virux.mangapp.model.Title;
 import net.virux.mangapp.model.User;
+import net.virux.mangapp.service.GenericService;
+import net.virux.mangapp.service.TitleService;
 import net.virux.mangapp.service.UserService;
 import net.virux.mangapp.service.impl.SendEmailService;
 
@@ -29,17 +31,18 @@ public class MainController {
 	@Autowired
 	private SendEmailService sendEmailService;
 	
+	@Autowired(required = true)
+	private GenericService<Title, Integer> titleService;
+	
 	
 	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
 	public String indexPage(ModelMap model){
-		List<User> usrs = userService.getAllUsers();
-		System.out.println(usrs.get(0).getTitles());
-		for(Title t : usrs.get(0).getTitles()){
-			System.out.println(t.getTitleName());
-		}
 		
 //		sendEmailService.readySendEmail("to@gmail.com", "from@gmail.com", "title", 
 //				"body");
+		
+		List<Title> titles = titleService.getAll();
+		System.out.println(titles);
 		
 		model.addAttribute("username", "lord cabula");
 		return "index";

@@ -13,85 +13,64 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import net.virux.mangapp.dao.GenericDao;
 
-public abstract class GenericDaoImpl<E, K extends Serializable> implements GenericDao<E, K> {
+public abstract class GenericDaoImpl<E, K extends Serializable> implements GenericDao<E, K>{
 
 	@Autowired
-	private SessionFactory sessionFactory;
+	SessionFactory sessionFactory;
 	
-	protected Class<? extends E> daoType;
+	private Class<E> clazz;
 	
-	/**
-	 * By defining this class as abstract, we prevent Spring from creating instance of this
-	 * class if not defined abstract getClass().getGenericSuperClass() would return Object.
-	 * There wouldbe exception because Object class does not have constructor with parame-
-	 * ters  
-	 */
+	private Session session;
+	private Transaction tx;
 	
-	public GenericDaoImpl() {
-		Type t = getClass().getGenericSuperclass();
-		ParameterizedType pt = (ParameterizedType) t;
-		daoType = (Class) pt.getActualTypeArguments()[0];
-	}
 	
+//	public GenericDaoImpl() {
+//        Type t = getClass().getGenericSuperclass();
+//        ParameterizedType pt = (ParameterizedType) t;
+//        daoType = (Class) pt.getActualTypeArguments()[0];
+//        System.out.println(daoType);
+//    }
 	
 	@Override
 	public void add(E entity) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		session.save(entity);
-		tx.commit();
-		session.close();
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void saveOrUpdate(E entity) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		session.saveOrUpdate(entity);
-		tx.commit();
-		session.close();
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void update(E entity) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		session.saveOrUpdate(entity);
-		tx.commit();
-		session.close();		
-	}
-
-	@Override
-	public void remove(E entity) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		session.delete(entity);
-		tx.commit();
-		session.close();
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public E find(K key) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		E mdl = session.get(daoType, key);
-		return mdl;
+	public void delete(E entity) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public List<E> getAll() {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		Criteria cr = session.createCriteria(daoType);
-		List<E> list = cr.list();
-		tx.commit();
-		session.close();
-		return list;
+	public E get(K key) {
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
-	
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public List<E> getAll() {
+		this.session = sessionFactory.openSession();
+		this.tx = this.session.beginTransaction();
+		Criteria cr = session.createCriteria(clazz.getClass());
+		List<E> request = cr.list();
+		this.tx.commit();
+		this.session.close();
+		return request;
+	}
 
 }

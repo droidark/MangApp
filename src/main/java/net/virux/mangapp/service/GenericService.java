@@ -1,8 +1,8 @@
-package net.virux.mangapp.dao;
+package net.virux.mangapp.service;
 
 import java.util.List;
 
-public interface GenericDao<E, K> {
+public interface GenericService<E, K> {
 
 	void add(E entity);
 	

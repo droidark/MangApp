@@ -1,25 +1,19 @@
-package net.virux.mangapp.dao.impl;
+package net.virux.mangapp.service.impl;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import net.virux.mangapp.dao.GenericDao;
 import net.virux.mangapp.model.Title;
+import net.virux.mangapp.service.GenericService;
 
-@Repository("titleDao")
-public class TitleDaoImpl implements GenericDao<Title, Integer>{
+@Service("titleService")
+public class TitleServiceImpl implements GenericService<Title, Integer>{
 	
 	@Autowired
-	SessionFactory sessionFactory;
-	
-	private Session session;
-	private Transaction tx;
+	private GenericDao<Title, Integer> genericDao;
 
 	@Override
 	public void add(Title entity) {
@@ -53,12 +47,10 @@ public class TitleDaoImpl implements GenericDao<Title, Integer>{
 
 	@Override
 	public List<Title> getAll() {
-		this.session = sessionFactory.openSession();
-		this.tx = this.session.beginTransaction();
-		Criteria cr = session.createCriteria(Title.class);
-		List<Title> titles = cr.list();
-		this.tx.commit();
-		this.session.close();
-		return titles;
+		System.out.println("Llego aqui");
+		return genericDao.getAll();
 	}
+	
+	
+
 }
