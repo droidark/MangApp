@@ -5,10 +5,10 @@ import java.util.List;
 import net.virux.mangapp.model.User;
 
 public interface UserService {
-	void addUser(User user);	
-	List<User> getAllUsers();	
-	User getUser(int id);	
-	User getUser(String username);	
-	void setUser(User user);	
-	void deleteUser(User user);
+	public User create(User shop);
+	public User delete(Integer id);
+	public List<User> findAll();
+	public User update(User shop);
+	public User get(Integer id);
+	public User get(String username);
 }

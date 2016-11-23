@@ -18,13 +18,13 @@ import net.virux.mangapp.model.Profile;
 @Service("LoginDetailsService")
 public class LoginDetailsService implements UserDetailsService{
 	
-	@Autowired
+	//@Autowired
 	private UserDao userDao;
 
 	@Override
 	public UserDetails loadUserByUsername(final String username) 
 			throws UsernameNotFoundException {
-		net.virux.mangapp.model.User user = userDao.getUser(username);
+		net.virux.mangapp.model.User user = userDao.get(username);
 		if(user == null){
 			throw new UsernameNotFoundException("Username not found");
 		}

@@ -1,9 +1,10 @@
 package net.virux.mangapp.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Author {
+public class Author implements Serializable{
 	private Integer idAuthor;
 	private String name;
 	private String nameJp;

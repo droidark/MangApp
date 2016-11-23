@@ -1,67 +1,54 @@
 package net.virux.mangapp.service.impl;
 
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
-import net.virux.mangapp.dao.ProfileDao;
-import net.virux.mangapp.dao.UserDao;
-import net.virux.mangapp.model.Profile;
 import net.virux.mangapp.model.User;
+import net.virux.mangapp.repository.UserRepository;
 import net.virux.mangapp.service.UserService;
 
 @Service("userService")
 public class UserServiceImpl implements UserService{
+
+	@Resource
+	private UserRepository userRepository;
+
+	@Override
+	public User create(User shop) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User delete(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> findAll() {
+		return userRepository.findAll();
+	}
+
+	@Override
+	public User update(User shop) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User get(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User get(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
-	@Autowired
-	private UserDao userDao;
-	
-	@Autowired
-	private ProfileDao profileDao;
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;	
-	
-	@Override
-	public void addUser(User user) {
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user.setSignUpDate(new Date());
-		user.setState("Pending");
-		Set<Profile> profiles = new HashSet<Profile>();
-		profiles.add(profileDao.getProfile(2));
-		user.setProfiles(profiles);
-		userDao.addUser(user);
-	}
-
-	@Override
-	public List<User> getAllUsers() {
-		return userDao.getAllUser();
-	}
-
-	@Override
-	public User getUser(int id) {
-		return userDao.getUser(id);
-	}
-
-	@Override
-	public User getUser(String username) {
-		return userDao.getUser(username);
-	}
-
-	@Override
-	public void setUser(User user) {
-		userDao.setUser(user);
-		
-	}
-
-	@Override
-	public void deleteUser(User user) {
-		userDao.deleteUser(user);		
-	}
-
 }

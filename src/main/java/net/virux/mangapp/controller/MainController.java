@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import net.virux.mangapp.model.Title;
 import net.virux.mangapp.model.User;
 import net.virux.mangapp.service.GenericService;
-import net.virux.mangapp.service.TitleService;
 import net.virux.mangapp.service.UserService;
 import net.virux.mangapp.service.impl.SendEmailService;
 
@@ -28,12 +28,8 @@ public class MainController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private SendEmailService sendEmailService;
-	
-	@Autowired(required = true)
-	private GenericService<Title, Integer> titleService;
-	
+//	@Autowired
+//	private SendEmailService sendEmailService;
 	
 	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
 	public String indexPage(ModelMap model){
@@ -41,8 +37,14 @@ public class MainController {
 //		sendEmailService.readySendEmail("to@gmail.com", "from@gmail.com", "title", 
 //				"body");
 		
-		List<Title> titles = titleService.getAll();
-		System.out.println(titles);
+		
+//		List<Title> titles = titleService.getAll();
+//		for(Title tl : titles){
+//			System.out.println(tl.getTitleName());
+//		}
+		
+		List<User> users = userService.findAll();
+		System.out.println(users);
 		
 		model.addAttribute("username", "lord cabula");
 		return "index";
@@ -57,11 +59,12 @@ public class MainController {
 	@RequestMapping(value = {"/confirm"}, method = RequestMethod.POST)
 	public String confirmPage(@ModelAttribute("command") User usr, 
 			BindingResult result, ModelMap model){
-		userService.addUser(usr);
+		//userService.add(usr);
 		model.addAttribute("username", usr.getUsername());
 		return "confirm";
 	}
 	
+	@RequestMapping(value = {"/login"}, method = RequestMethod.GET)
 	public String login(@RequestParam(value = "error", required = false) String error, 
 			@RequestParam(value = "logout", required = false) String logout, 
 			HttpServletRequest request, ModelMap model){
