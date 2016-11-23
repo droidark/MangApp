@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import net.virux.mangapp.model.Title;
 import net.virux.mangapp.model.User;
-import net.virux.mangapp.service.GenericService;
 import net.virux.mangapp.service.UserService;
 import net.virux.mangapp.service.impl.SendEmailService;
 
@@ -43,8 +42,8 @@ public class MainController {
 //			System.out.println(tl.getTitleName());
 //		}
 		
-		List<User> users = userService.findAll();
-		System.out.println(users);
+		User user = userService.get("fozz");
+		System.out.println();
 		
 		model.addAttribute("username", "lord cabula");
 		return "index";

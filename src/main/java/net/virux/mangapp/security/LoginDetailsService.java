@@ -12,19 +12,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import net.virux.mangapp.dao.UserDao;
 import net.virux.mangapp.model.Profile;
+import net.virux.mangapp.service.UserService;
 
 @Service("LoginDetailsService")
 public class LoginDetailsService implements UserDetailsService{
 	
-	//@Autowired
-	private UserDao userDao;
+	@Autowired
+	private UserService UserService;
 
 	@Override
 	public UserDetails loadUserByUsername(final String username) 
 			throws UsernameNotFoundException {
-		net.virux.mangapp.model.User user = userDao.get(username);
+		net.virux.mangapp.model.User user = UserService.get(username);
 		if(user == null){
 			throw new UsernameNotFoundException("Username not found");
 		}
