@@ -3,7 +3,7 @@
 <hibernate-mapping>
 	<class name="net.virux.mangapp.model.User" table="map_user">
 		<id column="id_user" name="idUser" type="integer">
-			<generator class="increment"/>
+			<generator class="assigned"/>
 		</id>
 		<property name="username" column="user_username" type="string"/>
 		<property name="password" column="user_password" type="string"/>
@@ -16,7 +16,7 @@
 		<property name="state" column="user_state" type="string"/>
 		
 		<!-- RELATIONSHIP MANY-TO-MANY [TABLE: map_user_x_profile]-->
-		<set name="profiles" table="map_user_x_profile" inverse="false" lazy="true" 
+		<set name="profiles" table="map_user_x_profile" inverse="true" lazy="true" 
 				fetch="select" cascade="all">
 			<key>
 				<column name="id_user" not-null="true"/>

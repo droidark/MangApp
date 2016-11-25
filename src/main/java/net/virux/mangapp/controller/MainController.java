@@ -42,9 +42,6 @@ public class MainController {
 //			System.out.println(tl.getTitleName());
 //		}
 		
-		User user = userService.get("fozz");
-		System.out.println();
-		
 		model.addAttribute("username", "lord cabula");
 		return "index";
 	}
@@ -58,7 +55,7 @@ public class MainController {
 	@RequestMapping(value = {"/confirm"}, method = RequestMethod.POST)
 	public String confirmPage(@ModelAttribute("command") User usr, 
 			BindingResult result, ModelMap model){
-		//userService.add(usr);
+		userService.create(usr);
 		model.addAttribute("username", usr.getUsername());
 		return "confirm";
 	}

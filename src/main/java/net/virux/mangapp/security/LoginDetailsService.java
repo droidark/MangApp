@@ -19,12 +19,12 @@ import net.virux.mangapp.service.UserService;
 public class LoginDetailsService implements UserDetailsService{
 	
 	@Autowired
-	private UserService UserService;
+	private UserService userService;
 
 	@Override
 	public UserDetails loadUserByUsername(final String username) 
 			throws UsernameNotFoundException {
-		net.virux.mangapp.model.User user = UserService.get(username);
+		net.virux.mangapp.model.User user = userService.get(username);
 		if(user == null){
 			throw new UsernameNotFoundException("Username not found");
 		}
@@ -35,6 +35,7 @@ public class LoginDetailsService implements UserDetailsService{
 	
 	private List<GrantedAuthority> getGrantedAuthority(net.virux.mangapp.model.User user){
 		List<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
+		System.out.println(user.getProfiles().size());
 		for(Profile profile : user.getProfiles()){
 			auth.add(new SimpleGrantedAuthority("ROLE_" + profile.getProfile()));
 		}

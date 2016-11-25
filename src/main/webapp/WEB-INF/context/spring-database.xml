@@ -42,6 +42,9 @@
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
 				<prop key="javax.persistence.schema-generation.database.action">none</prop>
 				<prop key="hibernate.ejb.use_class_enhancer">true</prop>
+				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+				<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+				<prop key="hibernate.show_sql">true</prop>
 			</props>
 		</property>
 		<property name="mappingResources">
@@ -59,6 +62,21 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory"/>
 	</bean>
+	
+	<tx:advice id="txAdvide" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true"/>
+			<tx:method name="add*" read-only="false"/>
+			<tx:method name="set*" read-only="false"/>
+			<tx:method name="delete*" read-only="false"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut expression="execution(* net.virux.mangapp.service.*Service.*(..))" 
+				id="mangappServiceOperation"/>
+			<aop:advisor advice-ref="txAdvide" pointcut-ref="mangappServiceOperation"/>
+	</aop:config>
 	
 	<tx:annotation-driven/>
 	
