@@ -32,15 +32,15 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User create(User user) {
 		System.out.println(userRepository.get(user.getUsername()));
-		
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user.setSignUpDate(new Date());
-		user.setState("Pending");
-		Set<Profile> profiles = new HashSet<Profile>();
-		profiles.add(profileService.get(2));
-		user.setProfiles(profiles);
-		userRepository.save(user);
-		
+		if (get(user.getUsername()) == null) {
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
+			user.setSignUpDate(new Date());
+			user.setState("Pending");
+			Set<Profile> profiles = new HashSet<Profile>();
+			profiles.add(profileService.get(2));
+			user.setProfiles(profiles);
+			userRepository.save(user);
+		}
 		return null;
 	}
 

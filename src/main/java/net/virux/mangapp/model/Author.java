@@ -1,16 +1,34 @@
 package net.virux.mangapp.model;
 
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-public class Author implements Serializable{
+@Entity
+@Table(name = "map_author")
+public class Author {
+	
+	@Id
+	@GeneratedValue
+	@Column(name = "id_author")
 	private Integer idAuthor;
+	
+	@Column(name = "author_name")
 	private String name;
+	
+	@Column(name = "author_name_jp")
 	private String nameJp;
+	
+	@Column(name = "author_avatar")
 	private String avatar;
+	
+	@Column(name = "author_bio")
 	private String bio;
-	private Set<Title> titles = new HashSet<Title>();
+	
+	
+//	private Set<Title> titles = new HashSet<Title>();
 	
 	public Integer getIdAuthor() {
 		return idAuthor;
@@ -39,13 +57,13 @@ public class Author implements Serializable{
 	public String getBio() {
 		return bio;
 	}
-	public void setBio(String bio) {
-		this.bio = bio;
-	}
-	public Set<Title> getTitles() {
-		return titles;
-	}
-	public void setTitles(Set<Title> titles) {
-		this.titles = titles;
-	}
+//	public void setBio(String bio) {
+//		this.bio = bio;
+//	}
+//	public Set<Title> getTitles() {
+//		return titles;
+//	}
+//	public void setTitles(Set<Title> titles) {
+//		this.titles = titles;
+//	}
 }

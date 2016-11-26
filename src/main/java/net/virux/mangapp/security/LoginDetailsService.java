@@ -35,7 +35,6 @@ public class LoginDetailsService implements UserDetailsService{
 	
 	private List<GrantedAuthority> getGrantedAuthority(net.virux.mangapp.model.User user){
 		List<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
-		System.out.println(user.getProfiles().size());
 		for(Profile profile : user.getProfiles()){
 			auth.add(new SimpleGrantedAuthority("ROLE_" + profile.getProfile()));
 		}

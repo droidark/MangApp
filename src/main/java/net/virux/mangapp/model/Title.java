@@ -1,24 +1,50 @@
 package net.virux.mangapp.model;
 
-import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-public class Title implements Serializable{
+@Entity
+@Table(name = "map_title")
+public class Title {
+	
+	@Id
+	@GeneratedValue
+	@Column(name = "id_title")
 	private Integer idTitle;
+	
+	@Column(name = "id_editorial")
 	private Integer idEditorial;
+	
+	@Column(name = "title_name")
 	private String titleName;
+	
+	@Column(name = "title_cover")
 	private String titleCover;
+	
+	@Column(name = "title_total_volumes")
 	private Integer totalVolumes;
+	
+	@Column(name = "title_volumes_published_jp")
 	private Integer volumesPublishedJp;
+	
+	@Column(name = "title_volumes_published_mx")
 	private Integer volumesPublishedMx;
+	
+	@Column(name = "title_status_jp")
 	private String statusJp;
+	
+	@Column(name = "title_status_mx")
 	private String statusMx;
+	
+	@Column(name = "title_jp_launch")
 	private Date jpLaunch;
+	
+	@Column(name = "title_mx_launch")
 	private Date mxLaunch;
-	private Set<User> users = new HashSet<User>();
-	private Set<Author> authors = new HashSet<Author>();
 	
 	public Integer getIdTitle() {
 		return idTitle;
@@ -86,16 +112,16 @@ public class Title implements Serializable{
 	public void setMxLaunch(Date mxLaunch) {
 		this.mxLaunch = mxLaunch;
 	}
-	public Set<User> getUsers() {
-		return users;
-	}
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
-	public Set<Author> getAuthors() {
-		return authors;
-	}
-	public void setAuthors(Set<Author> authors) {
-		this.authors = authors;
-	}
+//	public Set<User> getUsers() {
+//		return users;
+//	}
+//	public void setUsers(Set<User> users) {
+//		this.users = users;
+//	}
+//	public Set<Author> getAuthors() {
+//		return authors;
+//	}
+//	public void setAuthors(Set<Author> authors) {
+//		this.authors = authors;
+//	}
 }

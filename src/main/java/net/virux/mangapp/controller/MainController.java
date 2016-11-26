@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import net.virux.mangapp.model.Profile;
 import net.virux.mangapp.model.Title;
 import net.virux.mangapp.model.User;
 import net.virux.mangapp.service.UserService;
@@ -41,6 +42,13 @@ public class MainController {
 //		for(Title tl : titles){
 //			System.out.println(tl.getTitleName());
 //		}
+		
+		User user = userService.get(1);
+		System.out.println(user.getProfiles());
+		
+		for(Profile profile : user.getProfiles()){
+			System.out.println(profile.getProfile());
+		}
 		
 		model.addAttribute("username", "lord cabula");
 		return "index";
