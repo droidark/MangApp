@@ -31,7 +31,7 @@ public class User{
 	private Set<Profile> profiles = new HashSet<Profile>();
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_user")
 	public Integer getIdUser() {
 		return idUser;
@@ -112,7 +112,7 @@ public class User{
 		this.state = state;
 	}
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(
 			name = "map_user_x_profile", 
 			joinColumns = {@JoinColumn(name = "id_user")}, 

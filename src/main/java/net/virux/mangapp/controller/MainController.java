@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import net.virux.mangapp.model.Profile;
 import net.virux.mangapp.model.Title;
 import net.virux.mangapp.model.User;
+import net.virux.mangapp.service.ProfileService;
 import net.virux.mangapp.service.UserService;
 import net.virux.mangapp.service.impl.SendEmailService;
 
@@ -27,6 +28,9 @@ public class MainController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ProfileService profileService;
 	
 //	@Autowired
 //	private SendEmailService sendEmailService;
@@ -43,12 +47,8 @@ public class MainController {
 //			System.out.println(tl.getTitleName());
 //		}
 		
-		User user = userService.get(1);
-		System.out.println(user.getProfiles());
-		
-		for(Profile profile : user.getProfiles()){
-			System.out.println(profile.getProfile());
-		}
+		Profile profile = profileService.get(2);
+		System.out.println(profile.getProfile());
 		
 		model.addAttribute("username", "lord cabula");
 		return "index";

@@ -20,7 +20,7 @@ public class Profile{
 	private Set<User> users = new HashSet<User>();
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_profile")
 	public Integer getIdProfile() {
 		return idProfile;
