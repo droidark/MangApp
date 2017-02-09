@@ -24,7 +24,7 @@ public class LoginDetailsService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(final String username) 
 			throws UsernameNotFoundException {
-		net.virux.mangapp.model.User user = userService.get(username);
+		net.virux.mangapp.model.User user = userService.findByUsername(username);
 		if(user == null){
 			throw new UsernameNotFoundException("Username not found");
 		}

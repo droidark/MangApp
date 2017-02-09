@@ -30,9 +30,9 @@ public class UserServiceImpl implements UserService{
 	private ProfileService profileService;
 
 	@Override
-	public User create(User user) {
-		System.out.println(userRepository.get(user.getUsername()));
-		if (get(user.getUsername()) == null) {
+	public User save(User user) {
+		System.out.println(userRepository.findByUsername(user.getUsername()));
+		if (findByUsername(user.getUsername()) == null) {
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			user.setSignUpDate(new Date());
 			user.setState("Pending");
@@ -56,18 +56,13 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User update(User user) {
-		return null;
-	}
-
-	@Override
-	public User get(Integer id) {
+	public User findByIdUser(Integer id) {
 		return userRepository.findOne(id);
 	}
 
 	@Override
-	public User get(String username) {
-		return userRepository.get(username);
+	public User findByUsername(String username) {
+		return userRepository.findByUsername(username);
 	}
 	
 }

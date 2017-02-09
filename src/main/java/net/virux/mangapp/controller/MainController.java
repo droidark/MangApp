@@ -1,11 +1,8 @@
 package net.virux.mangapp.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.stereotype.Controller;
@@ -17,11 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import net.virux.mangapp.model.Profile;
-import net.virux.mangapp.model.Title;
 import net.virux.mangapp.model.User;
 import net.virux.mangapp.service.ProfileService;
 import net.virux.mangapp.service.UserService;
-import net.virux.mangapp.service.impl.SendEmailService;
 
 @Controller
 public class MainController {
@@ -47,8 +42,8 @@ public class MainController {
 //			System.out.println(tl.getTitleName());
 //		}
 		
-		Profile profile = profileService.get(2);
-		System.out.println(profile.getProfile());
+		User user = userService.findByIdUser(6);
+		System.out.println(user.getTitles().size());
 		
 		model.addAttribute("username", "lord cabula");
 		return "index";
@@ -63,7 +58,7 @@ public class MainController {
 	@RequestMapping(value = {"/confirm"}, method = RequestMethod.POST)
 	public String confirmPage(@ModelAttribute("command") User usr, 
 			BindingResult result, ModelMap model){
-		userService.create(usr);
+		userService.save(usr);
 		model.addAttribute("username", usr.getUsername());
 		return "confirm";
 	}
@@ -92,11 +87,11 @@ public class MainController {
 		return "adminIndex";
 	}
 		
-	//	ADMIN CONTROLLER
+	//	USER CONTROLLER
 	@RequestMapping(value = {"/manage"}, method = RequestMethod.GET)
 	public String manageIndex(ModelMap model){
 		model.addAttribute("user", "Spring Security Hello World");
-		return "userAdmin";
+		return "userIndex";
 	}
 	
 	

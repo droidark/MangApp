@@ -8,7 +8,7 @@
 		<title>Panel de administración</title>
 	</head>
 	<body>
-		<h1>Bienvenido al panel de adminsitración</h1>
+		<h1>Bienvenido al manejador</h1>
 		<form:form action="${pageContext.request.contextPath}/logout" method="post">
 			<input type="submit" value="Logout">
 		</form:form>

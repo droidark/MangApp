@@ -29,6 +29,7 @@ public class User{
 	private String ipAddress;
 	private String state;
 	private Set<Profile> profiles = new HashSet<Profile>();
+	private Set<Title> titles = new HashSet<Title>();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -124,4 +125,17 @@ public class User{
 	public void setProfiles(Set<Profile> profiles) {
 		this.profiles = profiles;
 	}
+	
+	@ManyToMany(cascade = CascadeType.MERGE)
+	@JoinTable(
+			name = "map_user_x_title",
+			joinColumns = {@JoinColumn(name = "id_user")},
+			inverseJoinColumns = {@JoinColumn(name = "id_title")}
+			)
+	public Set<Title> getTitles() {
+		return titles;
+	}
+	public void setTitles(Set<Title> titles) {
+		this.titles = titles;
+	}	
 }
